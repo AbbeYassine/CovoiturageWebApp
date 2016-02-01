@@ -44,6 +44,11 @@
             });
         });
 
+        //Show All post databases 
+        Route::group(['prefix' => 'posts'], function(){
+            Route::match(['get','post'],'/','FeedController@show');
+        });
+
         Route::group(['prefix'=>'login'] , function(){
             //Login User 
             Route::match(['get','post'],'/','LoginController@index');

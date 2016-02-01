@@ -21,5 +21,9 @@ class FeedController extends Controller
     	public function store($groupId){
        		return $this->gestGroup->saveFeeds($groupId); 	
     	}
+
+        public function show(){
+            return $this->gestGroup->getAllPost();
+        }
     	
 }

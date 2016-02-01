@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Groups;
 use App\Models\Post;
 use Facebook ;
+use Illuminate\Support\Facades\DB;
 class GestGroup 
 {
 		public function getFromFacebook($url){
@@ -143,7 +144,20 @@ class GestGroup
 		}
 		public function getIdGroup($groupId){
 			$group = Groups::where('identifiant','=',$groupId)->first();
+
+			if(!$group){
+				$responseGroup = $this->getGroup($groupId);
+				$group = new Groups ;
+				$group->identifiant = $groupId;
+				$group->nom = $responseGroup['name']; 
+				$group->save();
+			}
 			 
 			return $group->id_Groups;
 		}
+		public function getAllPost(){
+			return Post::where('created_at','>=',DB::raw('DATE_SUB(NOW(), INTERVAL 1 DAY)'))
+				->get();
+		}
+
 }

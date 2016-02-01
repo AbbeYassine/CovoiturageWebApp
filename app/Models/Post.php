@@ -13,5 +13,5 @@ class Post extends Model
     protected $fillable = ['identifiant','message','type','date','nb_Places','source','destination','prix',
     'depart','telephone','id_Groups','id_User'];
 
-    public $timestamps=false;
+    public $timestamps=true;
 }

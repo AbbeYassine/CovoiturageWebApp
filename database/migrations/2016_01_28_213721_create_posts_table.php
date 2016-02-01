@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration
             $table->integer('prix');
             $table->integer('depart');
             $table->string('telephone',100);
+            $table->timestamps();
 
 
             $table->integer('id_Groups')->unsigned();  
