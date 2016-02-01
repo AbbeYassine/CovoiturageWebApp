@@ -11,7 +11,7 @@
 |
 */
 	/*	Route::match(['get', 'post'], '/', 'LoginController@index');
-		Route::match(['get', 'post'], '/logout', 'LoginController@logout'); */
+  Route::match(['get', 'post'], '/logout', 'LoginController@logout'); */
   		// login group
       /*  Route::group(['prefix' => 'login'], function () {
             // Login with facebook
@@ -49,6 +49,14 @@
             Route::match(['get','post'],'/','LoginController@index');
             //Callback save Token
             Route::match(['get','post'],'/callback','LoginController@callback');
+        });
+
+        Route::group(['prefix' => 'mobile'], function()
+        {   
+            Route::group(['middleware' => 'jwt.auth'], function () {
+            
+            });
+            Route::post('signin', 'Auth\AuthentificateController@authentificate');
         });
 /*
 |--------------------------------------------------------------------------
