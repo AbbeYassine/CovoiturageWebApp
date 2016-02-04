@@ -159,5 +159,26 @@ class GestGroup
 			return Post::where('created_at','>=',DB::raw('DATE_SUB(NOW(), INTERVAL 1 DAY)'))
 				->get();
 		}
+		public function storeUser($Arrays){
+			$user = User::where('login','=',$Arrays['login'])
+				->get();
+
+			if(count($user)==0){
+				$user = new User ;
+
+				$user->nom = $Arrays['nom'];
+				$user->prenom= $Arrays['prenom'];
+				$user->login = $Arrays['login'];
+				$user->password = bcrypt($Arrays['password']);
+
+				$user->save();
+
+				return response()->json([
+					'success' => 'User add' ,
+					'user' => $user ]);
+			}else {
+				return response()->json(['success' => 'User exist']);
+			}
+		}
 
 }

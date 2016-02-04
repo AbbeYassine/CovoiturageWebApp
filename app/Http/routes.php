@@ -43,6 +43,7 @@
 
             });
         });
+        
 
         //Show All post databases 
         Route::group(['prefix' => 'posts'], function(){
@@ -56,12 +57,13 @@
             Route::match(['get','post'],'/callback','LoginController@callback');
         });
 
-        Route::group(['prefix' => 'mobile'], function()
-        {   
+        Route::group(['prefix' => 'mobile'], function(){   
             Route::group(['middleware' => 'jwt.auth'], function () {
             
             });
             Route::post('signin', 'Auth\AuthentificateController@authentificate');
+            Route::post('signup','InscriptionController@store');
+            
         });
 /*
 |--------------------------------------------------------------------------
