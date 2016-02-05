@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Models\User;
 
 class AuthentificateController extends Controller
 {
@@ -31,6 +32,7 @@ class AuthentificateController extends Controller
         }
 
         // if no errors are encountered we can return a JWT
-        return response()->json(compact('token'));
+        $user=User::whereLogin($request->input('login'))->get();
+        return response()->json(compact('token','user'));
     }
 }
